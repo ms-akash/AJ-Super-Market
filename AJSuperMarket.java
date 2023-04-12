@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Map.Entry;
 
 public class AJSuperMarket {
     static ArrayList<Offer> offers = new ArrayList<>();
