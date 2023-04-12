@@ -1,5 +1,5 @@
 public class Product{
-    String id, name;
+    String productId, productName;
     float price;
 
     Product(String id, String name, float price){

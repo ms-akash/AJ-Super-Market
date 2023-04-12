@@ -1,0 +1,16 @@
+public class Order{
+    ArrayList<OrderItem> orderItems;
+    float totalPrice;
+
+    Oder(ArrayList<OrderItem> orderItems){
+        this.setOrderItems(orderItems);
+        this.setTotalPrice();
+    }
+
+    void setOrderItems(ArrayList<OrderItem> orderItems){
+        this.orderItems = orderItems;
+    }
+    void setTotalPrice(){
+        this.totalPrice = calculatetotalprice(this.orderItems);
+    }
+}   
