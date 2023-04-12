@@ -10,7 +10,7 @@ public class Order{
     }
 
     public float getDiscount(int discount, int price){
-        return (price / 100) * discount;
+        return (price * discount) / 100;
     }
 
     public int discountParser(String disocount){
@@ -21,9 +21,8 @@ public class Order{
         for(OrderItem orderItem : this.orderItems){
             if(orderItem.offer.equals("N/A")){
                 this.totalPrice += orderItem.quantity * orderItem.product.price;
-                System.out.println(this.totalPrice);
             }else{
-                this.totalPrice += getDiscount(discountParser(orderItem.offer), orderItem.quantity * orderItem.totalPrice);
+                this.totalPrice += getDiscount(discountParser(orderItem.offer), orderItem.quantity * orderItem.product.price);
             }
         }
     }

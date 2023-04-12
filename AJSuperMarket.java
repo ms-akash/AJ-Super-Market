@@ -7,7 +7,6 @@ public class AJSuperMarket {
 
     public static String inputParser(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Input (EXIT, INVENTORY, SALE, STOCK)");
         String inputString = scanner.next();
         //scanner.close();
         return inputString;
@@ -18,18 +17,41 @@ public class AJSuperMarket {
             System.exit(0);
         }
         else if(inputString.equals("INVENTORY")){
-            addToInventory();
+            inventoryParser();
         }
         else if(inputString.equals("SALE")){
             makeSale();
         }
         else if(inputString.equals("STOCK")){
-            Inventory inventory = new Inventory();
-            String stockCommand = inputParser();
-            inventory.printStock(stringConvertor(stockCommand)[0]);
+            displayStock();
+        }
+        else if(inputString.equals("OFFER")){
+            getOffers();
         }
         else{
             System.out.println("Invalid Command");
+        }
+    }
+
+    public static void displayStock(){
+        Inventory inventory = new Inventory();
+        System.out.println("ENTER COMMAND IN THE FORMAT : STOCK=>Product ID");
+        String stockCommand = inputParser();
+        inventory.printStock(stringConvertor(stockCommand)[0]);
+    }
+
+    public static void getOffers(){
+        System.out.println("ENTER COMMAND IN THE FORMAT : OFFER=>Product ID|Discount;......");
+        String offerCommand = inputParser();
+        String[] offerInfo = stringConvertor(offerCommand);
+        putOffers(offerInfo);
+    }
+
+    public static void putOffers(String[] offerInfo){
+        for(int i = 0; i < offerInfo.length;i++){
+            String[] currentOffer = stringParser(offerInfo[i]);
+            Offer offer = new Offer(currentOffer[0], currentOffer[1]);
+            offers.add(offer);
         }
     }
 
@@ -38,9 +60,16 @@ public class AJSuperMarket {
         return new LineItem(product, quantity);
     }
 
-    public static void addToInventory(){
+    public static void inventoryParser(){
+        System.out.println("ENTER COMMAND IN THE FORMAT : INVENTORY=>ProductId|ProductName|Quantity|Price-Per-Quantity:.....");
         String product = inputParser();
         String[] products = stringConvertor(product); // products => {"productId|productName|quantity|pricePerQuantity", .......}
+
+        addToInventory(products);
+    }
+
+    public static void addToInventory(String[] products) {
+        
         Inventory inventory = new Inventory();
 
         for(int i = 0; i < products.length; i++){
@@ -68,6 +97,8 @@ public class AJSuperMarket {
         Inventory inventoryObject = new Inventory();
         ArrayList<OrderItem> itemsSold = new ArrayList<OrderItem>();
 
+
+        System.out.println("ENTER COMMAND IN THE FORMAT : SALE=>ProductId|Quantity;....");
         String saleCommand = inputParser();
         String sales[] = stringConvertor(saleCommand); // sales => {1|2, 2|3, .....}
         
@@ -109,6 +140,7 @@ public class AJSuperMarket {
 
     public static OrderItem generateOrderItem(String productId, int quantity){
             String offer = getOffer(productId);
+
             Inventory inventory = getInventory(productId);
             LineItem lineItem = inventory.inventoryItems.get(productId);
             
@@ -126,6 +158,7 @@ public class AJSuperMarket {
 
     public static void main(String[] args) {
         while(true){
+            System.out.println("Enter Input (EXIT, INVENTORY, SALE, STOCK)");
             String inputString = inputParser();
             doTask(inputString);
         }

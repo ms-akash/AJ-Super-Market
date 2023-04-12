@@ -19,6 +19,5 @@ public class Inventory{
         lineItem.quantity -= quantity;
 
         inventory.inventoryItems.put(productId, lineItem);
-        System.out.println("Inventory Updated");
     }
 }
