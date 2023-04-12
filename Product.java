@@ -1,8 +1,8 @@
 public class Product{
     String productId, productName;
-    float price;
+    int price;
 
-    Product(String productId, String productName, float price){
+    Product(String productId, String productName, int price){
         this.productId = productId;
         this.productName = productName;
         this.price = price;

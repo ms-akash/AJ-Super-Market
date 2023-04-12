@@ -8,8 +8,8 @@ public class AJSuperMarket {
     public static String inputParser(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Input (EXIT, INVENTORY, SALE, STOCK)");
-        String inputString = scanner.nextLine();
-        scanner.close();
+        String inputString = scanner.next();
+        //scanner.close();
         return inputString;
     }
 
@@ -33,7 +33,7 @@ public class AJSuperMarket {
         }
     }
 
-    public static LineItem getLineItem(String productId, String productName, int pricePerProduct, int quantity){
+    public static LineItem getLineItem(String productId, String productName, int quantity, int pricePerProduct){
         Product product = new   Product(productId, productName, pricePerProduct);
         return new LineItem(product, quantity);
     }
@@ -55,7 +55,7 @@ public class AJSuperMarket {
     }
 
     public static String[] stringParser(String input){
-        return input.split("//|");
+        return input.split("\\|");
     }
 
     public static String[] stringConvertor(String input){
@@ -112,7 +112,7 @@ public class AJSuperMarket {
             Inventory inventory = getInventory(productId);
             LineItem lineItem = inventory.inventoryItems.get(productId);
             
-            return new OrderItem(lineItem.product, quantity, offer, quantity);
+            return new OrderItem(lineItem.product, quantity, offer, (int)(quantity*lineItem.product.price));
     }   
 
     public static String getOffer(String productId){
