@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Order{
     ArrayList<OrderItem> orderItems;
     float totalPrice;
 
-    Oder(ArrayList<OrderItem> orderItems){
+    Order(ArrayList<OrderItem> orderItems){
         this.setOrderItems(orderItems);
         this.setTotalPrice();
     }
@@ -12,5 +14,9 @@ public class Order{
     }
     void setTotalPrice(){
         this.totalPrice = calculatetotalprice(this.orderItems);
+    }
+
+    float calculatetotalprice(ArrayList<OrderItem> orderItems){
+        return 0;
     }
 }   
