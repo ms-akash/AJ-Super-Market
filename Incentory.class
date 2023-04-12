@@ -1,0 +1,7 @@
+public class Inventory{
+    HashMap<String, Product> inventory = new HashMap<String, Product>();
+
+    Inventory(HashMap<String, Product> inventory){
+        this.inventory = inventory;
+    }
+}
